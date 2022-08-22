@@ -1,0 +1,30 @@
+---
+  2 # Docs on how to setup this file
+  3 # https://ansible-navigator.readthedocs.io/en/latest/settings/
+  4 ansible-navigator:
+  5   ansible:
+  6     inventories:
+  7     - /home/$LOGNAME/hosts
+  8  
+  9   execution-environment:
+ 10     image: quay.io/ansible/network-ee:latest
+ 11     enabled: true
+ 12     container-engine: podman
+ 13     pull-policy: missing
+ 14     volume-mounts:
+ 15     - src: "/etc/ansible/"
+ 16       dest: "/etc/ansible/"
+ 17     - src: /tmp/network/
+ 18       dest: /tmp/network/
+ 19  
+ 20   time-zone: local
+ 21  
+ 22   log-file:
+ 23     file: /home/$LOGNAME/ansible-navigator.log
+ 24  
+ 25   editor:
+ 26     command: code-server {filename}
+ 27     console: false
+ 28  
+ 29   playbook-artifact:
+ 30     save-as: /home/$LOGNAME/playbook-artifacts/{playbook_name}-artifact-{ts_utc}.json
